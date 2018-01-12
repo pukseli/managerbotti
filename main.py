@@ -23,7 +23,7 @@ def mainloop(botti):
                     botti.tiivista()
 
                 else:
-                    botti.send_message(last_update['message']['text'], chat_id)
+                    pass
             except KeyError:
                 chat_id = str(botti.get_chat_id())
 
