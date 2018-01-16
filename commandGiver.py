@@ -7,13 +7,13 @@ import time
 
 
 AKSELIN_CHAT_ID = "193210704"
-logging.basicConfig(level=logging.INFO,  format="%(asctime)s %(levelname)s  %(message)s")
+logging.basicConfig(level=logging.WARNING,  format="%(asctime)s %(levelname)s  %(message)s")
 
 
 
 class Commander:
-    #_BOT_TOKEN = "496561553:AAFEub5mhvF-BQJiDRyN0xmzzdf9u5WatUg" #managerbotti
-    _BOT_TOKEN = "471505208:AAHs8IFgDdYwVLnPzAvAm4SOGBJVixO6QSI" #aksuntestibotti
+    _BOT_TOKEN = "496561553:AAFEub5mhvF-BQJiDRyN0xmzzdf9u5WatUg" #managerbotti
+    #_BOT_TOKEN = "471505208:AAHs8IFgDdYwVLnPzAvAm4SOGBJVixO6QSI" #aksuntestibotti
     _BOT_URL = "https://api.telegram.org/bot" + _BOT_TOKEN + "/"
     last_update_id = 0
     last_send_update_id = 0
