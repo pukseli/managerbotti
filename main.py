@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import logging
 from commandGiver import *
 
 
@@ -27,9 +28,10 @@ def mainloop(botti):
                 else:
                     botti.send_message("moi",chat_id)
             except KeyError:
-                chat_id = str(botti.get_chat_id())
+                logging.log(Warning, "Unkown command received. Ddunno how. Please fix")
+                pass
 
-                botti.send_message("haista vittu", chat_id)
+
 
 
 
