@@ -17,11 +17,11 @@ def mainloop(botti):
 
                 command = last_update["message"]["text"].split(" ")[0]
 
-                if command == "/kiltacam" or command == "/kiltacam@aksuntestibot":
+                if command == "/kiltacam" or command == "/kiltacam@managerinbot":
                     print("nyt tehdään kiltacämi")
                     botti.send_gild_photo()
 
-                elif command == "/tiivista" or command == "/tiivista@aksuntestibot":
+                elif command == "/tiivista" or command == "/tiivista@managerinbot":
                     botti.tiivista()
 
                 else:
