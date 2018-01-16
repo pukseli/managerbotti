@@ -14,16 +14,18 @@ def mainloop(botti):
 
             try:
                 chat_id = str(botti.get_chat_id())
+
                 command = last_update["message"]["text"].split(" ")[0]
-                if command == "/kiltacam":
+
+                if command == "/kiltacam" or command == "/kiltacam@aksuntestibot":
                     print("nyt tehdään kiltacämi")
                     botti.send_gild_photo()
 
-                elif command == "/tiivista":
+                elif command == "/tiivista" or command == "/kiltacam@aksuntestibot":
                     botti.tiivista()
 
                 else:
-                    pass
+                    botti.send_message("moi",chat_id)
             except KeyError:
                 chat_id = str(botti.get_chat_id())
 
