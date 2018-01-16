@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
-import time
+#!/usr/bin/python3
 from commandGiver import *
+
 
 
 
@@ -21,7 +21,7 @@ def mainloop(botti):
                     print("nyt tehdään kiltacämi")
                     botti.send_gild_photo()
 
-                elif command == "/tiivista" or command == "/kiltacam@aksuntestibot":
+                elif command == "/tiivista" or command == "/tiivista@aksuntestibot":
                     botti.tiivista()
 
                 else:
