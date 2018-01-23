@@ -25,6 +25,9 @@ def mainloop(botti):
                 elif command == "/tiivista" or command == "/tiivista@managerinbot":
                     botti.tiivista()
 
+                elif command == "/paljon_kahvia" or command == "/paljon_kahvia@managerinbot":
+                    botti.kahvia()
+
                 else:
                     botti.send_message("moi",chat_id)
             except KeyError:
