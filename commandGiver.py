@@ -3,7 +3,7 @@ import logging
 import urllib.request
 from random import randint
 import time
-
+import datetime
 
 
 AKSELIN_CHAT_ID = "193210704"
@@ -21,6 +21,9 @@ class Commander:
     update_given = False
     emojis = ["\U0001F37B", "\U0001F4A9", "\U0001F60D", '\U0001F37A', "\U0001F34C", "Isä voisi puhua vähemmän",
               "\U0001F52B", "\U0001F525", "Nyt nukkumaan!", "Asiasisältöä", "\U0001F3E5","\U0001F494"]
+    kahvikuppeja = 0
+    kahvi_keitetty = datetime.datetime(2000,2,20)
+
 
     def tiivista(self):
         emoji = self.emojis[randint(0,len(self.emojis)-1)]
@@ -29,7 +32,7 @@ class Commander:
         self.send_message(emoji,chat_id=chat_id)
 
 
-    def send_gild_photo(self, chat_id=AKSELIN_CHAT_ID):
+    def send_gild_photo(self,):
         timestamp = "?ts=" +str(time.time())
         chat_id = self.get_chat_id()
         self.last_send_update_id = self.last_update_id
@@ -68,11 +71,23 @@ class Commander:
         self._update = update.json()["result"]
 
 
+
     def get_chat_id(self):
         chat_id = self._update[-1]['message']['chat']['id']
         if self.last_update_id == 0:
             return "0"
         return chat_id
+
+
+    def kahvia(self):
+        if self.kahvikuppeja == 1:
+            kahviviesti = "Kahvia jäljellä " + str(self.kahvikuppeja) + " kuppi"
+        else:
+            kahviviesti = "Kahvia jäljellä " + str(self.kahvikuppeja) + " kuppia"
+        aikaviesti = "Kahvi keitetty "
+        aika = datetime.time()
+
+        self.send_message(kahviviesti, self.get_chat_id())
 
 if __name__ == "__main__":
     a = Commander()
