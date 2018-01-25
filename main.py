@@ -25,8 +25,6 @@ def mainloop(botti):
                 elif command == "/tiivista" or command == "/tiivista@managerinbot":
                     botti.tiivista()
 
-                else:
-                    botti.send_message("moi",chat_id)
             except KeyError:
                 logging.log(Warning, "Unkown command received. Ddunno how. Please fix")
                 pass

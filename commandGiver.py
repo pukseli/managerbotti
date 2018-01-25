@@ -19,7 +19,8 @@ class Commander:
     last_send_update_id = 0
     _update = ""
     update_given = False
-    emojis = ["\U0001F37B","\U0001F4A9", "\U0001F60D",'\U0001F37A']
+    emojis = ["\U0001F37B", "\U0001F4A9", "\U0001F60D", '\U0001F37A', "\U0001F34C", "Isä voisi puhua vähemmän",
+              "\U0001F52B", "\U0001F525", "Nyt nukkumaan!", "Asiasisältöä", "\U0001F3E5","\U0001F494"]
 
     def tiivista(self):
         emoji = self.emojis[randint(0,len(self.emojis)-1)]
