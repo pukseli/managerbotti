@@ -22,6 +22,13 @@ def mainloop(botti):
             text= " ".join(message[1:])
             if command == "voice":
                 botti.get_voice_message(" ".join(message[1:]),chat_id)
+
+            elif command == "/help":
+                helppi = "Commands: \nvoice [voice message]: get voice message. \nlist: list of available messages"
+                botti.send_message(helppi, chat_id)
+
+            elif command == "list":
+                botti.list_of_voice_messages(chat_id)
             else:
                 botti.send_message("moi", chat_id)
 

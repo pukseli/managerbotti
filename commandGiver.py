@@ -32,14 +32,21 @@ class Commander:
             self.bot.send_message(text="No such a message in database",chat_id=chat_id,)
             return False
 
+    def list_of_voice_messages(self, chat_id):
+        keys = ""
+        for key in self.VOICE_MESSAGES.keys():
+            keys = keys + key + ", "
+        message = "Voice messages are: " + keys
+        self.send_message(message, chat_id)
+
+
+
     def get_voice_message(self, voice, chat_id):
         print(voice)
         if self.voice_message_is_in_database(voice, chat_id):
             self.bot.send_voice(voice=open(self.VOICE_MESSAGES[voice],"rb"), chat_id=chat_id,timeout=200)
         else:
             return
-
-
 
 
     def send_message(self, message, chat_id):
