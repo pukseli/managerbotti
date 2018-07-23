@@ -1,57 +1,50 @@
 import requests
 import logging
-import urllib.request
 from random import randint
 import time
 import datetime
+import telegram
 
 
 AKSELIN_CHAT_ID = "193210704"
 logging.basicConfig(level=logging.WARNING,  format="%(asctime)s %(levelname)s  %(message)s")
 
 
-
 class Commander:
-    _BOT_TOKEN = "496561553:AAFEub5mhvF-BQJiDRyN0xmzzdf9u5WatUg" #managerbotti
+
+    #_BOT_TOKEN = "496561553:AAFEub5mhvF-BQJiDRyN0xmzzdf9u5WatUg" #managerbotti
     #_BOT_TOKEN = "471505208:AAHs8IFgDdYwVLnPzAvAm4SOGBJVixO6QSI" #aksuntestibotti
+    _BOT_TOKEN = "627633049:AAHQMWa4hp5XLbTkBQZrBsX64tl2fgrQ2wM" #voicemessagebot
     _BOT_URL = "https://api.telegram.org/bot" + _BOT_TOKEN + "/"
     last_update_id = 0
     last_send_update_id = 0
     _update = ""
     update_given = False
-    emojis = ["\U0001F37B", "\U0001F4A9", "\U0001F60D", '\U0001F37A', "\U0001F34C", "Isä voisi puhua vähemmän",
-              "\U0001F52B", "\U0001F525", "Nyt nukkumaan!", "Asiasisältöä", "\U0001F3E5","\U0001F494"]
-    kahvikuppeja = 0
-    kahvi_keitetty = datetime.datetime(2000,2,20)
+    VOICE_MESSAGES = {"brutal":"src/voice_messages/brutal.ogg","kakka":"src/voice_messages/kakka.ogg", "playing to win":"src/voice_messages/playing_to_win.ogg","wow":"src/voice_messages/wow.ogg","kiitos":"src/voice_messages/kiitos.ogg"}
+    bot = telegram.Bot(token=_BOT_TOKEN)
 
+    def voice_message_is_in_database(self,voice, chat_id):
+        try:
+            test = self.VOICE_MESSAGES[voice]
+            print(test)
+            return True
+        except KeyError:
+            self.bot.send_message(text="No such a message in database",chat_id=chat_id,)
+            return False
 
-    def tiivista(self):
-        emoji = self.emojis[randint(0,len(self.emojis)-1)]
-        print(emoji)
-        chat_id = self.get_chat_id()
-        self.send_message(emoji,chat_id=chat_id)
+    def get_voice_message(self, voice, chat_id):
+        print(voice)
+        if self.voice_message_is_in_database(voice, chat_id):
+            self.bot.send_voice(voice=open(self.VOICE_MESSAGES[voice],"rb"), chat_id=chat_id,timeout=200)
+        else:
+            return
 
-
-    def send_gild_photo(self,):
-        timestamp = "?ts=" +str(time.time())
-        chat_id = self.get_chat_id()
-        self.last_send_update_id = self.last_update_id
-        urllib.request.urlretrieve("http://tietojohtajakilta.net/webcam/cam_1.jpg", "kuva.png")
-        url = self._BOT_URL + "sendPhoto?chat_id=" + str(chat_id) + "&photo=" + "http://tietojohtajakilta.net/webcam/cam_1.jpg" + timestamp
-
-        r = requests.post(url)
-        print(r.text)
 
 
 
     def send_message(self, message, chat_id):
-        url = self._BOT_URL +"sendMessage?chat_id="+ str(chat_id) + "&text="+ str(message)
         self.last_send_update_id = self.last_update_id
-        print(url)
-        if not self.update_given:
-            self.update_given = True
-            return
-        requests.post(url)
+        self.bot.send_message(chat_id, message + "")
 
 
     def get_last_update(self):
@@ -79,18 +72,7 @@ class Commander:
         return chat_id
 
 
-    def kahvia(self):
-        if self.kahvikuppeja == 1:
-            kahviviesti = "Kahvia jäljellä " + str(self.kahvikuppeja) + " kuppi"
-        else:
-            kahviviesti = "Kahvia jäljellä " + str(self.kahvikuppeja) + " kuppia"
-        aikaviesti = "Kahvi keitetty "
-        aika = datetime.time()
-
-        self.send_message(kahviviesti, self.get_chat_id())
-
 if __name__ == "__main__":
     a = Commander()
     a.fetch_update()
-    a.send_message("Miten menee?")
     print(a.get_chat_id())

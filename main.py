@@ -1,41 +1,33 @@
 #!/usr/bin/python3
 import logging
 from commandGiver import *
+import time
 
 
 
 
 def mainloop(botti):
+    last_update = botti.get_last_update()
+    update_id = last_update['update_id']
+    send_update_id = update_id
+
     while True:
-        botti.fetch_update()
         last_update = botti.get_last_update()
-        last_update_id = last_update['update_id']
-
-        if last_update_id != botti.last_send_update_id:
-
-            try:
-                chat_id = str(botti.get_chat_id())
-
-                command = last_update["message"]["text"].split(" ")[0]
-
-                if command == "/kiltacam" or command == "/kiltacam@managerinbot":
-                    print("nyt tehdään kiltacämi")
-                    botti.send_gild_photo()
-
-                elif command == "/tiivista" or command == "/tiivista@managerinbot":
-                    botti.tiivista()
-
-                elif command == "/paljon_kahvia" or command == "/paljon_kahvia@managerinbot":
-                    botti.kahvia()
-
-                else:
-                    botti.send_message("moi",chat_id)
-            except KeyError:
-                logging.log(Warning, "Unkown command received. Ddunno how. Please fix")
-                pass
+        update_id=last_update['update_id']
+        if update_id != send_update_id:
+            chat_id = str(botti.get_chat_id())
+            message = last_update["message"]["text"].split(" ")
+            command = message[0]
+            print(message)
+            text= " ".join(message[1:])
+            if command == "voice":
+                botti.get_voice_message(" ".join(message[1:]),chat_id)
+            else:
+                botti.send_message("moi", chat_id)
 
 
-
+        time.sleep(1)
+        send_update_id=update_id
 
 
 if __name__ == "__main__":
